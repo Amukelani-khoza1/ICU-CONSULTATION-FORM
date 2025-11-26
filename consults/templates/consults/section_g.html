@@ -1,0 +1,25 @@
+<!-- templates/consults/section_g.html -->
+{% extends "base.html" %}
+
+{% block progress %}
+<div class="progress mb-4">
+    <div class="progress-bar" role="progressbar" style="width:100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+{% endblock %}
+
+{% block content %}
+<h2>Section G: ICU Doctor's Assessment (ICU Team Use Only)</h2>
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="mb-3">
+        {{ field.label_tag }}
+        {{ field }}
+        {% if field.errors %} <div class="text-danger">{{ field.errors }}</div> {% endif %}
+    </div>
+    {% endfor %}
+    <a href="{% url 'consults:section_f' consult.pk %}" class="btn btn-secondary">Back</a>
+    <a href="{% url 'consults:consult_summary' consult.pk %}" class="btn btn-info">Review Summary</a>
+    <button type="submit" class="btn btn-primary">Next</button>
+</form>
+{% endblock %}

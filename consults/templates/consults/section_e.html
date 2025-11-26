@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% load widget_tweaks %}
+
+{% block progress %}
+<div class="progress mb-4">
+    <div class="progress-bar" role="progressbar" style="width:70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Section E: Investigations</h2>
+
+<form method="post" action="{% url 'consults:section_e' consult.pk %}">
+    {% csrf_token %}
+
+    <!-- Latest ABG -->
+    <div class="mb-3">
+        <label class="form-label fw-semibold">Latest ABG</label>
+        {{ form.latest_abg|add_class:"form-control" }}
+        {% if form.latest_abg.errors %}
+            <div class="text-danger">{{ form.latest_abg.errors }}</div>
+        {% endif %}
+    </div>
+
+    <!-- Key Labs -->
+    <div class="mb-3">
+        <label class="form-label fw-semibold">Key Labs (U&E, FBC, CRP)</label>
+        {{ form.key_labs|add_class:"form-control" }}
+        {% if form.key_labs.errors %}
+            <div class="text-danger">{{ form.key_labs.errors }}</div>
+        {% endif %}
+    </div>
+
+    <!-- Imaging Findings -->
+    <div class="mb-3">
+        <label class="form-label fw-semibold">Imaging Findings</label>
+        {{ form.imaging_findings|add_class:"form-control" }}
+        {% if form.imaging_findings.errors %}
+            <div class="text-danger">{{ form.imaging_findings.errors }}</div>
+        {% endif %}
+    </div>
+
+    <!-- Time Tests Done -->
+    <div class="mb-3">
+        <label class="form-label fw-semibold">Time Tests Were Done</label>
+        {{ form.time_tests_done|add_class:"form-control" }}
+        {% if form.time_tests_done.errors %}
+            <div class="text-danger">{{ form.time_tests_done.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="d-flex justify-content-between mt-4">
+        <a href="{% url 'consults:section_d' consult.pk %}" class="btn btn-secondary">Back</a>
+        <button type="submit" class="btn btn-primary">Next</button>
+    </div>
+
+</form>
+{% endblock %}

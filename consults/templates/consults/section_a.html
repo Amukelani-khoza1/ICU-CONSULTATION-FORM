@@ -1,0 +1,103 @@
+<!-- templates/consults/section_a.html -->
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block progress %}
+<div class="progress mb-4">
+    <div class="progress-bar" role="progressbar" style="width:10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Section A: Patient & Requesting Team Details</h2>
+
+<form method="post" class="p-4 border rounded bg-light shadow-sm">
+    {% csrf_token %}
+
+    <!-- Patient Name -->
+    <div class="mb-3">
+        <label class="form-label">Patient Name</label>
+        {{ form.patient_name|add_class:"form-control" }}
+        {% if form.patient_name.errors %} <div class="text-danger small">{{ form.patient_name.errors }}</div> {% endif %}
+    </div>
+
+    <!-- Age + Date of Birth -->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label class="form-label">Age</label>
+            {{ form.age|add_class:"form-control" }}
+            {% if form.age.errors %} <div class="text-danger small">{{ form.age.errors }}</div> {% endif %}
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Date of Birth</label>
+            {{ form.date_of_birth|add_class:"form-control" }}
+            {% if form.date_of_birth.errors %} <div class="text-danger small">{{ form.date_of_birth.errors }}</div> {% endif %}
+        </div>
+    </div>
+
+    <!-- Gender -->
+    <div class="mb-3">
+        <label class="form-label">Gender</label>
+        {{ form.gender|add_class:"form-control" }}
+        {% if form.gender.errors %} <div class="text-danger small">{{ form.gender.errors }}</div> {% endif %}
+    </div>
+
+    <!-- Hospital Number + Ward -->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label class="form-label">Hospital Number</label>
+            {{ form.hospital_number|add_class:"form-control" }}
+            {% if form.hospital_number.errors %} <div class="text-danger small">{{ form.hospital_number.errors }}</div> {% endif %}
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Ward</label>
+            {{ form.ward|add_class:"form-control" }}
+            {% if form.ward.errors %} <div class="text-danger small">{{ form.ward.errors }}</div> {% endif %}
+        </div>
+    </div>
+
+    <!-- Request Date + Discipline -->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label class="form-label">Date & Time of Request</label>
+            {{ form.request_datetime|add_class:"form-control" }}
+            {% if form.request_datetime.errors %} <div class="text-danger small">{{ form.request_datetime.errors }}</div> {% endif %}
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Requesting Discipline</label>
+            {{ form.requesting_discipline|add_class:"form-control" }}
+            {% if form.requesting_discipline.errors %} <div class="text-danger small">{{ form.requesting_discipline.errors }}</div> {% endif %}
+        </div>
+    </div>
+
+    <!-- Requesting Doctor + Contact -->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label class="form-label">Requesting Dr</label>
+            {{ form.requesting_dr|add_class:"form-control" }}
+            {% if form.requesting_dr.errors %} <div class="text-danger small">{{ form.requesting_dr.errors }}</div> {% endif %}
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Requesting Dr Contact Info</label>
+            {{ form.requesting_dr_contact|add_class:"form-control" }}
+            {% if form.requesting_dr_contact.errors %} <div class="text-danger small">{{ form.requesting_dr_contact.errors }}</div> {% endif %}
+        </div>
+    </div>
+
+    <!-- Speed Dial -->
+    <div class="mb-3">
+        <label class="form-label">Requesting Dr Speed Dial</label>
+        {{ form.requesting_dr_speed_dial|add_class:"form-control" }}
+        {% if form.requesting_dr_speed_dial.errors %} <div class="text-danger small">{{ form.requesting_dr_speed_dial.errors }}</div> {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100 mt-3">Next</button>
+
+</form>
+
+{% endblock %}

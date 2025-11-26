@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<h2 class="mb-4">Section D: Current Clinical Status</h2>
+
+<form method="post" action="{% url 'consults:section_d' consult.pk %}">
+    {% csrf_token %}
+
+    <table class="table table-bordered">
+        <!-- Airway -->
+        <tr>
+            <th>Airway</th>
+            <td>
+                <div class="form-check form-check-inline">
+                    {{ form.airway_patent }} <label class="form-check-label">Patent</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    {{ form.airway_threatened }} <label class="form-check-label">Threatened</label>
+                </div>
+            </td>
+            <td>
+                <div class="form-check form-check-inline">
+                    <label class="me-2">Intubated?</label>
+                    {{ form.intubated }}
+                </div>
+            </td>
+        </tr>
+
+        <!-- Breathing -->
+        <tr>
+            <th>Breathing</th>
+            <td>
+                SpO₂:
+                {{ form.breathing_spo2|add_class:"form-control d-inline-block w-auto" }} %
+
+                <div class="form-check form-check-inline ms-3">
+                    <label class="me-2">Distress:</label>
+                    {{ form.breathing_distress }}
+                </div>
+            </td>
+            <td>
+                O₂ Device:
+                {{ form.breathing_device|add_class:"form-select d-inline-block w-auto" }}
+            </td>
+        </tr>
+
+        <!-- Circulation -->
+        <tr>
+            <th>Circulation</th>
+            <td>
+                BP:
+                {{ form.bp_systolic|add_class:"form-control d-inline-block w-auto" }}
+                /
+                {{ form.bp_diastolic|add_class:"form-control d-inline-block w-auto" }}
+                mmHg
+            </td>
+            <td>
+                <div class="form-check form-check-inline">
+                    <label class="me-2">Inotropes?</label>
+                    {{ form.circulation_inotropes }}
+                </div>
+
+                <div class="form-check form-check-inline ms-3">
+                    <label class="me-2">Antihypertensives:</label>
+                    {{ form.circulation_anti_hpt }}
+                </div>
+            </td>
+        </tr>
+
+        <!-- Heart -->
+        <tr>
+            <th>Heart Rate</th>
+            <td>
+                {{ form.heart_rate|add_class:"form-control d-inline-block w-auto" }} bpm
+            </td>
+            <td>
+                Rhythm:
+                {{ form.heart_rhythm|add_class:"form-select d-inline-block w-auto" }}
+            </td>
+        </tr>
+
+        <!-- Fluids -->
+        <tr>
+            <th>Fluids</th>
+            <td>
+                Fluid Type:
+                {{ form.fluid_type|add_class:"form-select d-inline-block w-auto" }}
+            </td>
+            <td>
+                Urine Output:
+                {{ form.fluid_urine_output|add_class:"form-control d-inline-block w-auto" }} ml/hr
+            </td>
+        </tr>
+
+        <!-- Temperature -->
+        <tr>
+            <th>Temperature</th>
+            <td>
+                {{ form.temperature|add_class:"form-control d-inline-block w-auto" }} ℃
+            </td>
+            <td>
+                Measures:
+                {{ form.measures|add_class:"form-control d-inline-block w-auto" }}
+            </td>
+        </tr>
+
+        <!-- Neurological -->
+        <tr>
+            <th>GCS + Neuro</th>
+            <td>
+                GCS:
+                {{ form.gcs|add_class:"form-control d-inline-block w-auto" }}
+
+                <div class="form-check form-check-inline ms-3">
+                    <label class="me-2">Sedation?</label>
+                    {{ form.sedation }}
+                </div>
+            </td>
+            <td>
+                <strong>Pupils:</strong><br>
+                Left:
+                Size {{ form.pupil_left_size|add_class:"form-control d-inline-block w-auto" }}
+                Reactivity {{ form.pupil_left_reactivity|add_class:"form-select d-inline-block w-auto" }}
+
+                <br class="my-2">
+
+                Right:
+                Size {{ form.pupil_right_size|add_class:"form-control d-inline-block w-auto" }}
+                Reactivity {{ form.pupil_right_reactivity|add_class:"form-select d-inline-block w-auto" }}
+            </td>
+        </tr>
+    </table>
+
+    <div class="d-flex justify-content-between mt-4">
+        <a href="{% url 'consults:section_c' consult.pk %}" class="btn btn-secondary">Back</a>
+        <button type="submit" class="btn btn-primary">Next</button>
+    </div>
+</form>
+
+{% endblock %}

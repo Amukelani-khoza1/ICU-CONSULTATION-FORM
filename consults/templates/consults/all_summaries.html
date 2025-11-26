@@ -1,0 +1,44 @@
+<!-- templates/consults/all_summaries.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Submitted ICU Consultations</h2>
+
+    {% if summaries %}
+        <table class="table table-bordered table-striped shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Patient Name</th>
+                    <th>Hospital</th>
+                    <th>Doctor</th>
+                    <th>Date Submitted</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for consult in summaries %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ consult.patient_name }}</td>
+                        <td>{{ consult.hospital_number }}</td>
+                        <td>{{ consult.requesting_dr }}</td>
+                        <td>{{ consult.request_datetime|date:"Y-m-d H:i" }}</td>
+                        <td>
+                            <a href="{% url 'consults:review_summary' consult.id %}" class="btn btn-sm btn-primary">
+                                View Summary
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info text-center">
+            No submitted consultations found.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

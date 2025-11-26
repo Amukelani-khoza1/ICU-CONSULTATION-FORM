@@ -1,0 +1,74 @@
+<!-- templates/consults/consult_summary.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h3>Review Consultation Summary</h3>
+            <p class="mb-0 small">Please review all details before submitting</p>
+        </div>
+
+        <div class="card-body p-4">
+            <!-- Section A -->
+            <h5 class="text-primary">Section A: Patient Details</h5>
+            <p><strong>Patient Name:</strong> {{ consult.patient_name }}</p>
+            <p><strong>Age:</strong> {{ consult.age }}</p>
+            <p><strong>Date of Birth:</strong> {{ consult.date_of_birth }}</p>
+            <p><strong>Gender:</strong> {{ consult.gender }}</p>
+            <p><strong>Hospital Number:</strong> {{ consult.hospital_number }}</p>
+            <p><strong>Ward:</strong> {{ consult.ward }}</p>
+            <p><strong>Date & time of Request:</strong> {{ consult.request_datetime }}</p>
+            <p><strong>Requesting Discipline:<strong> {{ consult.requesing_discipline }}<p>
+            <p><strong>Requesting Dr:<strong> {{ consult.requesting_dr }}<p>
+            <p><strong>Requesting Dr Contact Info:<strong> {{ consult.requesting_dr_contact_info }}<p>
+            <p><strong>Requesting Dr Speed Dial:<strong> {{ consult.requesting_dr_speed_dial }}<p>
+            <hr>
+
+            <!-- Section B -->
+            <h5 class="text-primary">Section B: Reason for ICU Consult</h5>
+            <p>{{ consult.reason_for_consult }}</p>
+            <hr>
+
+            <!-- Section C -->
+            <h5 class="text-primary">Section C: Clinical Summary</h5>
+            <p>{{ consult.clinical_summary }}</p>
+            <hr>
+
+            <!-- Section D -->
+            <h5 class="text-primary">Section D: Current Clinical Status</h5>
+            <p>{{ consult.current_status }}</p>
+            <hr>
+
+            <!-- Section E -->
+            <h5 class="text-primary">Section E: Investigations</h5>
+            <p>{{ consult.investigations }}</p>
+            <hr>
+
+            <!-- Section F -->
+            <h5 class="text-primary">Section F: Planned Interventions</h5>
+            <p>{{ consult.planned_interventions }}</p>
+            <hr>
+
+            <!-- Section G -->
+            <h5 class="text-primary">Section G: ICU Doctor's Assessment</h5>
+            <p>{{ consult.doctor_assessment }}</p>
+            <hr>
+
+            <!-- Submission -->
+            <form method="post">
+                {% csrf_token %}
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-success btn-lg px-5">
+                        ✅ Submit Consultation
+                    </button>
+                    <a href="{% url 'consults:section_g' consult.id %}" class="btn btn-secondary ms-3">
+                        ✏️ Edit Last Section
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

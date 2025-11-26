@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h3>ICU Consultation Summary</h3>
+        </div>
+
+        <div class="card-body p-4">
+
+            <!-- Section A -->
+            <h5 class="mb-3 text-primary">Section A: Patient Details</h5>
+
+            <p><strong>Patient Name:</strong> {{ consult.patient_name }}</p>
+            <p><strong>Age:</strong> {{ consult.age }}</p>
+            <p><strong>Date of Birth:</strong> {{ consult.date_of_birth }}</p>
+            <p><strong>Gender:</strong> {{ consult.gender }}</p>
+            <p><strong>Hospital Number:</strong> {{ consult.hospital_number }}</p>
+            <p><strong>Ward:</strong> {{ consult.ward }}</p>
+            <p><strong>Date & Time of Request:</strong> {{ consult.request_datetime }}</p>
+            <p><strong>Requesting Discipline:</strong> {{ consult.requesting_discipline }}</p>
+            <p><strong>Requesting Dr:</strong> {{ consult.requesting_dr }}</p>
+            <p><strong>Requesting Dr Contact Info:</strong> {{ consult.requesting_dr_contact }}</p>
+            <p><strong>Requesting Dr Speed Dial:</strong> {{ consult.requesting_dr_speed_dial }}</p>
+
+            <hr>
+
+            <!-- Section B -->
+            <h5 class="mb-3 text-primary">Section B: Reason for ICU Consult</h5>
+
+            {% if consult.reason %}
+                <ul>
+                    {% for item in consult.reason %}
+                        <li>{{ item|capfirst|replace:"_"|" " }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No reason specified.</p>
+            {% endif %}
+
+            {% if consult.reason_other %}
+                <p><strong>Other:</strong> {{ consult.reason_other }}</p>
+            {% endif %}
+
+            <hr>
+
+            <!-- Section C -->
+            <h5 class="mb-3 text-primary">Section C: Clinical Summary</h5>
+            <p>{{ consult.clinical_summary|default:"No details provided" }}</p>
+
+            <hr>
+
+            <!-- Section D -->
+            <h5 class="mb-3 text-primary">Section D: Current Clinical Status</h5>
+            <p>{{ consult.current_status|default:"No details provided" }}</p>
+
+            <hr>
+
+            <!-- Section E -->
+            <h5 class="mb-3 text-primary">Section E: Investigations</h5>
+            <p>{{ consult.investigations|default:"No details provided" }}</p>
+
+            <hr>
+
+            <!-- Section F -->
+            <h5 class="mb-3 text-primary">Section F: Planned Interventions</h5>
+            <p>{{ consult.planned_interventions|default:"No details provided" }}</p>
+
+            <hr>
+
+            <!-- Section G -->
+            <h5 class="mb-3 text-primary">Section G: ICU Doctor’s Assessment</h5>
+            <p>{{ consult.doctor_assessment|default:"No assessment provided" }}</p>
+
+            <hr>
+
+            <!-- Submission Info -->
+            <div class="text-muted small">
+                <p><strong>Submitted by:</strong> {{ consult.doctor_name }}</p>
+                <p><strong>Date Submitted:</strong> {{ consult.updated_at|date:"Y-m-d H:i" }}</p>
+            </div>
+
+            <!-- Buttons -->
+            <div class="mt-4 text-center">
+                <a href="{% url 'consults:all_summaries' %}" class="btn btn-outline-primary me-2">← Back to All Summaries</a>
+                <button class="btn btn-success" onclick="window.print()">🖨️ Print Summary</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

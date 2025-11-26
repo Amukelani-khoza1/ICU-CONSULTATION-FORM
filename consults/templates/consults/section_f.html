@@ -1,0 +1,49 @@
+<!-- templates/consults/section_f.html -->
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block progress %}
+<div class="progress mb-4">
+    <div class="progress-bar" role="progressbar" style="width:85%;"></div>
+</div>
+{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Section F: Current (Planned) Interventions</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    <div class="container">
+        {% for field in form %}
+            <div class="row mb-3 align-items-center">
+                
+                <!-- LEFT COLUMN (LABEL) -->
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">{{ field.label }}</label>
+                </div>
+
+                <!-- RIGHT COLUMN (INPUT) -->
+                <div class="col-md-8">
+                    {% if field.field.widget.input_type == "select" %}
+                        {{ field|add_class:"form-select" }}
+                    {% elif field.field.widget.input_type == "textarea" %}
+                        {{ field|add_class:"form-control" }}
+                    {% else %}
+                        {{ field|add_class:"form-control" }}
+                    {% endif %}
+
+                    {% if field.errors %}
+                        <div class="text-danger small">{{ field.errors }}</div>
+                    {% endif %}
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'consults:section_e' consult.pk %}" class="btn btn-secondary">Back</a>
+    <button type="submit" class="btn btn-primary">Next</button>
+
+</form>
+{% endblock %}

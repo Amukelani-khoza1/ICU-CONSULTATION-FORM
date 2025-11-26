@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block progress %}
+<div class="progress mb-4">
+    <div class="progress-bar" role="progressbar" style="width:25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Section B: Reason for ICU Consult</h2>
+
+<form method="post" class="p-4 border rounded bg-light shadow-sm">
+    {% csrf_token %}
+
+    <!-- Reasons (Checkbox list) -->
+    <div class="mb-3">
+        <label class="form-label fw-semibold">Select the reason(s) for ICU consultation:</label>
+
+        <div class="ms-2">
+            {{ form.reason }}
+        </div>
+
+        {% if form.reason.errors %}
+            <div class="text-danger small mt-1">{{ form.reason.errors }}</div>
+        {% endif %}
+    </div>
+
+    <!-- "Other" reason text box -->
+    <div class="mb-3">
+        <label class="form-label">If "Other", please specify:</label>
+        {{ form.reason_other|add_class:"form-control" }}
+
+        {% if form.reason_other.errors %}
+            <div class="text-danger small mt-1">{{ form.reason_other.errors }}</div>
+        {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100 mt-3">Next</button>
+
+</form>
+
+{% endblock %}
