@@ -11,52 +11,85 @@
         </div>
 
         <div class="card-body p-4">
-            <!-- Section A -->
-            <h5 class="text-primary">Section A: Patient Details</h5>
-            <p><strong>Patient Name:</strong> {{ consult.patient_name }}</p>
-            <p><strong>Age:</strong> {{ consult.age }}</p>
-            <p><strong>Date of Birth:</strong> {{ consult.date_of_birth }}</p>
-            <p><strong>Gender:</strong> {{ consult.gender }}</p>
-            <p><strong>Hospital Number:</strong> {{ consult.hospital_number }}</p>
-            <p><strong>Ward:</strong> {{ consult.ward }}</p>
-            <p><strong>Date & time of Request:</strong> {{ consult.request_datetime }}</p>
-            <p><strong>Requesting Discipline:<strong> {{ consult.requesing_discipline }}<p>
-            <p><strong>Requesting Dr:<strong> {{ consult.requesting_dr }}<p>
-            <p><strong>Requesting Dr Contact Info:<strong> {{ consult.requesting_dr_contact_info }}<p>
-            <p><strong>Requesting Dr Speed Dial:<strong> {{ consult.requesting_dr_speed_dial }}<p>
+
+            <!-- ===== SECTION A ===== -->
+            <h5 class="text-primary mb-3">Section A: Patient Details</h5>
+            <table class="table table-bordered">
+                <tr><th>Patient Name</th><td>{{ consult.patient_name }}</td></tr>
+                <tr><th>Age</th><td>{{ consult.age }}</td></tr>
+                <tr><th>Date of Birth</th><td>{{ consult.date_of_birth }}</td></tr>
+                <tr><th>Gender</th><td>{{ consult.gender }}</td></tr>
+                <tr><th>Hospital Number</th><td>{{ consult.hospital_number }}</td></tr>
+                <tr><th>Ward</th><td>{{ consult.ward }}</td></tr>
+                <tr><th>Date & Time of Request</th><td>{{ consult.request_datetime }}</td></tr>
+                <tr><th>Requesting Discipline</th><td>{{ consult.requesting_discipline }}</td></tr>
+                <tr><th>Requesting Doctor</th><td>{{ consult.requesting_dr }}</td></tr>
+                <tr><th>Doctor Contact Info</th><td>{{ consult.requesting_dr_contact_info }}</td></tr>
+                <tr><th>Doctor Speed Dial</th><td>{{ consult.requesting_dr_speed_dial }}</td></tr>
+            </table>
+
             <hr>
 
-            <!-- Section B -->
-            <h5 class="text-primary">Section B: Reason for ICU Consult</h5>
-            <p>{{ consult.reason_for_consult }}</p>
+            <!-- ===== SECTION B ===== -->
+            <h5 class="text-primary mb-3">Section B: Reason for ICU Consult</h5>
+            <table class="table table-bordered">
+                <tr><th>Main Reason</th><td>{{ consult.reason_for_consult }}</td></tr>
+            </table>
+
             <hr>
 
-            <!-- Section C -->
-            <h5 class="text-primary">Section C: Clinical Summary</h5>
-            <p>{{ consult.clinical_summary }}</p>
+            <!-- ===== SECTION C ===== -->
+            <h5 class="text-primary mb-3">Section C: Clinical Summary</h5>
+            <div class="border p-3 rounded bg-light">
+                {{ consult.clinical_summary }}
+            </div>
+
             <hr>
 
-            <!-- Section D -->
-            <h5 class="text-primary">Section D: Current Clinical Status</h5>
-            <p>{{ consult.current_status }}</p>
+            <!-- ===== SECTION D ===== -->
+            <h5 class="text-primary mb-3">Section D: Current Clinical Status</h5>
+            <table class="table table-bordered">
+                <tr><th>Airway</th><td>{{ consult.airway_status }}</td></tr>
+                <tr><th>Breathing</th><td>{{ consult.breathing_status }}</td></tr>
+                <tr><th>Circulation</th><td>{{ consult.circulation_status }}</td></tr>
+                <tr><th>Disability</th><td>{{ consult.disability_status }}</td></tr>
+                <tr><th>Exposure</th><td>{{ consult.exposure_status }}</td></tr>
+            </table>
+
             <hr>
 
-            <!-- Section E -->
-            <h5 class="text-primary">Section E: Investigations</h5>
-            <p>{{ consult.investigations }}</p>
+            <!-- ===== SECTION E ===== -->
+            <h5 class="text-primary mb-3">Section E: Investigations</h5>
+            <table class="table table-bordered">
+                <tr><th>Blood Tests</th><td>{{ consult.blood_tests }}</td></tr>
+                <tr><th>Imaging</th><td>{{ consult.imaging }}</td></tr>
+                <tr><th>Other Investigations</th><td>{{ consult.other_investigations }}</td></tr>
+            </table>
+
             <hr>
 
-            <!-- Section F -->
-            <h5 class="text-primary">Section F: Planned Interventions</h5>
-            <p>{{ consult.planned_interventions }}</p>
+            <!-- ===== SECTION F ===== -->
+            <h5 class="text-primary mb-3">Section F: Planned Interventions</h5>
+            <table class="table table-bordered">
+                <tr><th>Airway</th><td>{{ consult.airway_plan }}</td></tr>
+                <tr><th>Ventilation / Oxygen Support</th><td>{{ consult.ventilation_support }}</td></tr>
+                <tr><th>IV Fluids</th><td>{{ consult.iv_fluids }}</td></tr>
+                <tr><th>Inotropes / Vasopressors</th><td>{{ consult.inotropes }}</td></tr>
+                <tr><th>Antibiotics</th><td>{{ consult.antibiotics }}</td></tr>
+                <tr><th>Other Critical Interventions</th><td>{{ consult.other_interventions }}</td></tr>
+            </table>
+
             <hr>
 
-            <!-- Section G -->
-            <h5 class="text-primary">Section G: ICU Doctor's Assessment</h5>
-            <p>{{ consult.doctor_assessment }}</p>
+            <!-- ===== SECTION G ===== -->
+            <h5 class="text-primary mb-3">Section G: ICU Doctor's Assessment</h5>
+            <div class="border p-3 rounded bg-light">
+                {{ consult.doctor_assessment }}
+            </div>
+
             <hr>
 
-            <!-- Submission -->
+            <!-- ===== SUBMISSION ===== -->
             <form method="post">
                 {% csrf_token %}
                 <div class="text-center mt-4">
@@ -68,6 +101,7 @@
                     </a>
                 </div>
             </form>
+
         </div>
     </div>
 </div>

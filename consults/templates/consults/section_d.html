@@ -7,16 +7,16 @@
 <form method="post" action="{% url 'consults:section_d' consult.pk %}">
     {% csrf_token %}
 
-    <table class="table table-bordered">
+    <table class="table table-bordered table-responsive">
         <!-- Airway -->
         <tr>
             <th>Airway</th>
             <td>
                 <div class="form-check form-check-inline">
-                    {{ form.airway_patent }} <label class="form-check-label">Patent</label>
+                    {{ form.airway_patent}} <label class="form-label">Patent</Label>
                 </div>
                 <div class="form-check form-check-inline">
-                    {{ form.airway_threatened }} <label class="form-check-label">Threatened</label>
+                    {{ form.airway_threatened}} <label class="form-label">Threatened</Label>
                 </div>
             </td>
             <td>
@@ -31,17 +31,14 @@
         <tr>
             <th>Breathing</th>
             <td>
-                SpO₂:
-                {{ form.breathing_spo2|add_class:"form-control d-inline-block w-auto" }} %
-
+                SpO₂: <input type="number" name="breathing_spo2" class="underscore-input" placeholder="__" /> %
                 <div class="form-check form-check-inline ms-3">
-                    <label class="me-2">Distress:</label>
+                    <label class="form-label">Distress:</label>
                     {{ form.breathing_distress }}
                 </div>
             </td>
             <td>
-                O₂ Device:
-                {{ form.breathing_device|add_class:"form-select d-inline-block w-auto" }}
+                O₂ Device: <input type="text" class="underscore-input" placeholder="__" />
             </td>
         </tr>
 
@@ -49,20 +46,15 @@
         <tr>
             <th>Circulation</th>
             <td>
-                BP:
-                {{ form.bp_systolic|add_class:"form-control d-inline-block w-auto" }}
-                /
-                {{ form.bp_diastolic|add_class:"form-control d-inline-block w-auto" }}
-                mmHg
+                BP: <input type="text" class="underscore-input" placeholder="__" /> / <input type="text" class="underscore-input" placeholder="__" /> mmHg
             </td>
             <td>
                 <div class="form-check form-check-inline">
-                    <label class="me-2">Inotropes?</label>
+                    <label class="form-label">Inotropes?</label>
                     {{ form.circulation_inotropes }}
                 </div>
-
                 <div class="form-check form-check-inline ms-3">
-                    <label class="me-2">Antihypertensives:</label>
+                    <label class="form-label">Antihypertensives:</label>
                     {{ form.circulation_anti_hpt }}
                 </div>
             </td>
@@ -72,11 +64,10 @@
         <tr>
             <th>Heart Rate</th>
             <td>
-                {{ form.heart_rate|add_class:"form-control d-inline-block w-auto" }} bpm
+                <input type="text" class="underscore-input" placeholder="__" /> bpm
             </td>
             <td>
-                Rhythm:
-                {{ form.heart_rhythm|add_class:"form-select d-inline-block w-auto" }}
+                Rhythm: <input type="text" class="underscore-input" placeholder="__" />
             </td>
         </tr>
 
@@ -84,12 +75,10 @@
         <tr>
             <th>Fluids</th>
             <td>
-                Fluid Type:
-                {{ form.fluid_type|add_class:"form-select d-inline-block w-auto" }}
+                Fluid Type: {{ form.fluid_type|add_class:"form-select d-inline-block w-auto" }}
             </td>
             <td>
-                Urine Output:
-                {{ form.fluid_urine_output|add_class:"form-control d-inline-block w-auto" }} ml/hr
+                Urine Output: <input type="text" class="underscore-input" placeholder="__" /> ml/hr
             </td>
         </tr>
 
@@ -97,11 +86,10 @@
         <tr>
             <th>Temperature</th>
             <td>
-                {{ form.temperature|add_class:"form-control d-inline-block w-auto" }} ℃
+                <input type="text" class="underscore-input" placeholder="__" /> °C
             </td>
             <td>
-                Measures:
-                {{ form.measures|add_class:"form-control d-inline-block w-auto" }}
+                Measures: <input type="text" class="underscore-input" placeholder="__" />
             </td>
         </tr>
 
@@ -109,25 +97,16 @@
         <tr>
             <th>GCS + Neuro</th>
             <td>
-                GCS:
-                {{ form.gcs|add_class:"form-control d-inline-block w-auto" }}
-
+                GCS: <input type="text" class="underscore-input" placeholder="__" /> / <input type="text" class="underscore-input" placeholder="__" />
                 <div class="form-check form-check-inline ms-3">
-                    <label class="me-2">Sedation?</label>
+                    <label class="form-label">Sedation?</label>
                     {{ form.sedation }}
                 </div>
             </td>
             <td>
                 <strong>Pupils:</strong><br>
-                Left:
-                Size {{ form.pupil_left_size|add_class:"form-control d-inline-block w-auto" }}
-                Reactivity {{ form.pupil_left_reactivity|add_class:"form-select d-inline-block w-auto" }}
-
-                <br class="my-2">
-
-                Right:
-                Size {{ form.pupil_right_size|add_class:"form-control d-inline-block w-auto" }}
-                Reactivity {{ form.pupil_right_reactivity|add_class:"form-select d-inline-block w-auto" }}
+                Left: Size <input type="text" class="underscore-input" placeholder="__" />, Reactivity: <input type="text" class="underscore-input" placeholder="________" /><br>
+                Right: Size <input type="text" class="underscore-input" placeholder="__" />, Reactivity: <input type="text" class="underscore-input" placeholder="________" />
             </td>
         </tr>
     </table>
@@ -137,5 +116,16 @@
         <button type="submit" class="btn btn-primary">Next</button>
     </div>
 </form>
+
+<style>
+    .underscore-input {
+        border: none;
+        border-bottom: 1px solid #000; /* Creates the appearance of an underscore */
+        width: 60px; /* Adjust width as needed */
+        max-width: 100%; /* Ensures responsiveness */
+        outline: none; /* Removes default focus outline */
+        text-align: center; /* Centers the text within the input box */
+    }
+</style>
 
 {% endblock %}
